@@ -24,6 +24,9 @@ class Ui_Form(object):
             Form.setObjectName(u"Form")
         Form.resize(601, 401)
         Form.setMinimumSize(QSize(601, 401))
+        icon = QIcon()
+        icon.addFile(u"\u041c\u0430\u0441\u0442\u0435\u0440 \u043f\u043e\u043b.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        Form.setWindowIcon(icon)
         Form.setStyleSheet(u"background: white;\n"
 "")
         self.tableWidget = QTableWidget(Form)

@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QWidget, QApplication, QTableWidgetItem
+from PySide6.QtWidgets import *
 import sys
 from main_form import Ui_Form as Main_Form
 from partners_form import Ui_Form as Partners_Form
@@ -25,6 +25,69 @@ class PartnersWindow(QWidget):
         INN = self.ui.edt_inn.text()
         rating = self.ui.edt_rating.text()
         cursor = conn.cursor()
+
+        if title == '':
+            QMessageBox.critical(
+                self, 
+                "Ошибка ввода",
+                "Поле title не может быть пустым"
+            )
+            return -1
+        if partner_type == '':
+            QMessageBox.critical(
+                self, 
+                "Ошибка ввода",
+                "Поле partner_type не может быть пустым"
+            )
+            return -1
+        if headmaster == '':
+            QMessageBox.critical(
+                self, 
+                "Ошибка ввода",
+                "Поле headmaster не может быть пустым"
+            )
+            return -1
+        if mail == '':
+            QMessageBox.critical(
+                self, 
+                "Ошибка ввода",
+                "Поле mail не может быть пустым"
+            )
+            return -1
+        if phone == '':
+            QMessageBox.critical(
+                self, 
+                "Ошибка ввода",
+                "Поле phone не может быть пустым"
+            )
+            return -1
+        if address == '':
+            QMessageBox.critical(
+                self, 
+                "Ошибка ввода",
+                "Поле address не может быть пустым"
+            )
+            return -1
+        if INN == '':
+            QMessageBox.critical(
+                self, 
+                "Ошибка ввода",
+                "Поле INN не может быть пустым"
+            )
+            return -1
+            QMessageBox.critical(
+                self, 
+                "Ошибка ввода",
+                "Поле address не может быть пустым"
+            )
+            return -1
+        if rating == '':
+            QMessageBox.critical(
+                self, 
+                "Ошибка ввода",
+                "Поле rating не может быть пустым"
+            )
+            return -1
         
         q = f"""INSERT INTO `partners` (`title`, `type`, `headmaster`, 
 `mail`, `phone`, `address`, `INN`, `rating`) 
@@ -49,6 +112,69 @@ VALUES ('{title}', '{partner_type}', '{headmaster}',
         INN = self.ui.edt_inn.text()
         rating = self.ui.edt_rating.text()
         cursor = conn.cursor()
+
+        if title == '':
+            QMessageBox.critical(
+                self, 
+                "Ошибка ввода",
+                "Поле title не может быть пустым"
+            )
+            return -1
+        if partner_type == '':
+            QMessageBox.critical(
+                self, 
+                "Ошибка ввода",
+                "Поле partner_type не может быть пустым"
+            )
+            return -1
+        if headmaster == '':
+            QMessageBox.critical(
+                self, 
+                "Ошибка ввода",
+                "Поле headmaster не может быть пустым"
+            )
+            return -1
+        if mail == '':
+            QMessageBox.critical(
+                self, 
+                "Ошибка ввода",
+                "Поле mail не может быть пустым"
+            )
+            return -1
+        if phone == '':
+            QMessageBox.critical(
+                self, 
+                "Ошибка ввода",
+                "Поле phone не может быть пустым"
+            )
+            return -1
+        if address == '':
+            QMessageBox.critical(
+                self, 
+                "Ошибка ввода",
+                "Поле address не может быть пустым"
+            )
+            return -1
+        if INN == '':
+            QMessageBox.critical(
+                self, 
+                "Ошибка ввода",
+                "Поле INN не может быть пустым"
+            )
+            return -1
+            QMessageBox.critical(
+                self, 
+                "Ошибка ввода",
+                "Поле address не может быть пустым"
+            )
+            return -1
+        if rating == '':
+            QMessageBox.critical(
+                self, 
+                "Ошибка ввода",
+                "Поле rating не может быть пустым"
+            )
+            return -1
 
         global p_id
 

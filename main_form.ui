@@ -19,6 +19,10 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>Мастер пол.png</normaloff>Мастер пол.png</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">background: white;
 </string>
@@ -54,6 +58,8 @@ color: black;</string>
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="app_icon.qrc"/>
+ </resources>
  <connections/>
 </ui>

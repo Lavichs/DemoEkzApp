@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="images">
+    <file alias="icon.icon">Мастер пол.ico</file>
+    <file alias="ico.png">Мастер пол.png</file>
+  </qresource>
+</RCC>

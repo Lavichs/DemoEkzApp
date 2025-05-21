@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'partners_form.ui'
+## Form generated from reading UI file 'partner_form.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.0
 ##
@@ -22,28 +22,17 @@ class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(401, 341)
-        Form.setStyleSheet(u"background: white;\n"
+        Form.resize(492, 362)
+        Form.setMinimumSize(QSize(492, 362))
+        Form.setMaximumSize(QSize(492, 362))
+        Form.setStyleSheet(u"background:  white;\n"
 "color: black;")
-        self.btn_add = QPushButton(Form)
-        self.btn_add.setObjectName(u"btn_add")
-        self.btn_add.setGeometry(QRect(100, 30, 81, 25))
-        self.btn_add.setStyleSheet(u"background-color: #67BA80;")
-        self.btn_edit = QPushButton(Form)
-        self.btn_edit.setObjectName(u"btn_edit")
-        self.btn_edit.setGeometry(QRect(210, 30, 81, 25))
-        self.btn_edit.setStyleSheet(u"background-color: #67BA80;")
         self.formLayoutWidget = QWidget(Form)
         self.formLayoutWidget.setObjectName(u"formLayoutWidget")
-        self.formLayoutWidget.setGeometry(QRect(10, 80, 381, 251))
+        self.formLayoutWidget.setGeometry(QRect(10, 60, 471, 315))
         self.formLayout = QFormLayout(self.formLayoutWidget)
         self.formLayout.setObjectName(u"formLayout")
         self.formLayout.setContentsMargins(0, 0, 0, 0)
-        self.label = QLabel(self.formLayoutWidget)
-        self.label.setObjectName(u"label")
-
-        self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label)
-
         self.edt_title = QLineEdit(self.formLayoutWidget)
         self.edt_title.setObjectName(u"edt_title")
 
@@ -119,6 +108,17 @@ class Ui_Form(object):
 
         self.formLayout.setWidget(7, QFormLayout.ItemRole.FieldRole, self.edt_rating)
 
+        self.label = QLabel(self.formLayoutWidget)
+        self.label.setObjectName(u"label")
+
+        self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label)
+
+        self.btn_create = QPushButton(Form)
+        self.btn_create.setObjectName(u"btn_create")
+        self.btn_create.setGeometry(QRect(30, 10, 201, 34))
+        self.btn_edit = QPushButton(Form)
+        self.btn_edit.setObjectName(u"btn_edit")
+        self.btn_edit.setGeometry(QRect(260, 10, 201, 34))
 
         self.retranslateUi(Form)
 
@@ -127,9 +127,6 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
-        self.btn_add.setText(QCoreApplication.translate("Form", u"\u0421\u043e\u0437\u0434\u0430\u0442\u044c", None))
-        self.btn_edit.setText(QCoreApplication.translate("Form", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None))
-        self.label.setText(QCoreApplication.translate("Form", u"text", None))
         self.label_2.setText(QCoreApplication.translate("Form", u"type", None))
         self.label_3.setText(QCoreApplication.translate("Form", u"headmaster", None))
         self.label_4.setText(QCoreApplication.translate("Form", u"mail", None))
@@ -137,5 +134,8 @@ class Ui_Form(object):
         self.label_6.setText(QCoreApplication.translate("Form", u"address", None))
         self.label_7.setText(QCoreApplication.translate("Form", u"INN", None))
         self.label_8.setText(QCoreApplication.translate("Form", u"rating", None))
+        self.label.setText(QCoreApplication.translate("Form", u"title", None))
+        self.btn_create.setText(QCoreApplication.translate("Form", u"\u0421\u043e\u0437\u0434\u0430\u0442\u044c", None))
+        self.btn_edit.setText(QCoreApplication.translate("Form", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None))
     # retranslateUi
 

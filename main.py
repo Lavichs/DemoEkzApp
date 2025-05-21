@@ -1,190 +1,103 @@
-from PySide6.QtWidgets import *
 import sys
+from curses.ascii import isdigit
+from os.path import split
+
+from PySide6.QtWidgets import *
 from main_form import Ui_Form as Main_Form
-from partners_form import Ui_Form as Partners_Form
-from db import conn
+from partners_form import Ui_Form as PartnerForm
+import pymysql
 import random
 
 
-class PartnersWindow(QWidget):
+conn = pymysql.connect(
+    host="localhost",
+    user="root",
+    password="root",
+    db="demo_ekz"
+)
+
+
+cursor = conn.cursor()
+_id: None | int = None
+
+
+class PartnerWindow(QWidget):
     def __init__(self):
-        super(PartnersWindow, self).__init__()
-        self.ui = Partners_Form()
+        super(PartnerWindow, self).__init__()
+        self.ui = PartnerForm()
         self.ui.setupUi(self)
 
-        self.ui.btn_add.clicked.connect(self.create_partner)
-        self.ui.btn_edit.clicked.connect(self.update_partner)
+        self.ui.btn_create.clicked.connect(self.create)
     
-    def create_partner(self):
+    def create(self):
+        fields = self.get_fields()
+        if not fields:
+            QMessageBox.critical(self, "Ошибка ввода", "Необходимо заполнить все поля")
+            return False
+        stmt = ("INSERT INTO partners (`title`, `type`, `headmaster`, `mail`, `phone`, `address`, `INN`, `rating`) "
+                "VALUES (%s, %s, %s, %s, %s, %s, %s, %s)")
+        cursor.execute(stmt, fields)
+        conn.commit()
+        QMessageBox.information(self, "", "Партнер добавлен")
+        self.close()
+
+    def update(self):
+        global _id
+        fields = self.get_fields()
+        if not fields:
+            QMessageBox.critical(self, "Ошибка ввода", "Необходимо заполнить все поля")
+            return False
+        stmt = ("UPDATE partners SET `title`=%s, `type`=%s, "
+                "`headmaster`=%s, `mail`=%s, `phone`=%s, `inn=%s, "
+                "`address=%s, `rating`=%s WHERE `id`=%s")
+        cursor.execute(stmt, fields)
+        conn.commit()
+        QMessageBox.information(self, "", "Партнер обновлен")
+        self.close()
+
+
+
+    def get_fields(self):
         title = self.ui.edt_title.text()
-        partner_type = self.ui.edt_type.text()
+        PType = self.ui.edt_type.text()
         headmaster = self.ui.edt_headmaster.text()
         mail = self.ui.edt_mail.text()
         phone = self.ui.edt_phone.text()
+        inn = self.ui.edt_inn.text()
         address = self.ui.edt_address.text()
-        INN = self.ui.edt_inn.text()
         rating = self.ui.edt_rating.text()
-        cursor = conn.cursor()
 
-        if title == '':
-            QMessageBox.critical(
-                self, 
-                "Ошибка ввода",
-                "Поле title не может быть пустым"
-            )
-            return -1
-        if partner_type == '':
-            QMessageBox.critical(
-                self, 
-                "Ошибка ввода",
-                "Поле partner_type не может быть пустым"
-            )
-            return -1
-        if headmaster == '':
-            QMessageBox.critical(
-                self, 
-                "Ошибка ввода",
-                "Поле headmaster не может быть пустым"
-            )
-            return -1
-        if mail == '':
-            QMessageBox.critical(
-                self, 
-                "Ошибка ввода",
-                "Поле mail не может быть пустым"
-            )
-            return -1
-        if phone == '':
-            QMessageBox.critical(
-                self, 
-                "Ошибка ввода",
-                "Поле phone не может быть пустым"
-            )
-            return -1
-        if address == '':
-            QMessageBox.critical(
-                self, 
-                "Ошибка ввода",
-                "Поле address не может быть пустым"
-            )
-            return -1
-        if INN == '':
-            QMessageBox.critical(
-                self, 
-                "Ошибка ввода",
-                "Поле INN не может быть пустым"
-            )
-            return -1
-            QMessageBox.critical(
-                self, 
-                "Ошибка ввода",
-                "Поле address не может быть пустым"
-            )
-            return -1
-        if rating == '':
-            QMessageBox.critical(
-                self, 
-                "Ошибка ввода",
-                "Поле rating не может быть пустым"
-            )
-            return -1
-        
-        q = f"""INSERT INTO `partners` (`title`, `type`, `headmaster`, 
-`mail`, `phone`, `address`, `INN`, `rating`) 
-VALUES ('{title}', '{partner_type}', '{headmaster}', 
-'{mail}', '{phone}','{address}', '{INN}', '{rating}')
-        """
-        res = cursor.execute(q)
-        conn.commit()
+        if title == "":
+            QMessageBox.critical(self, "Ошибка ввода", "Поле title не может быть пустым")
+            return False
+        if PType == "":
+            QMessageBox.critical(self, "Ошибка ввода", "Поле PType не может быть пустым")
+            return False
+        if headmaster == "":
+            QMessageBox.critical(self, "Ошибка ввода", "Поле headmaster не может быть пустым")
+            return False
+        if mail == "":
+            QMessageBox.critical(self, "Ошибка ввода", "Поле mail не может быть пустым")
+            return False
+        if phone == "":
+            QMessageBox.critical(self, "Ошибка ввода", "Поле phone не может быть пустым")
+            return False
+        if inn == "":
+            QMessageBox.critical(self, "Ошибка ввода", "Поле inn не может быть пустым")
+            return False
+        if address == "":
+            QMessageBox.critical(self, "Ошибка ввода", "Поле address не может быть пустым")
+            return False
+        if rating == "":
+            QMessageBox.critical(self, "Ошибка ввода", "Поле rating не может быть пустым")
+            return False
+        try:
+            rating = int(rating)
+        except:
+            QMessageBox.critical(self, "Ошибка ввода", "rating должен быть числом")
+            return False
 
-        if res:
-            print("insert success")
-        else:
-            print("error on insert")
-
-    def update_partner(self):
-        title = self.ui.edt_title.text()
-        partner_type = self.ui.edt_type.text()
-        headmaster = self.ui.edt_headmaster.text()
-        mail = self.ui.edt_mail.text()
-        phone = self.ui.edt_phone.text()
-        address = self.ui.edt_address.text()
-        INN = self.ui.edt_inn.text()
-        rating = self.ui.edt_rating.text()
-        cursor = conn.cursor()
-
-        if title == '':
-            QMessageBox.critical(
-                self, 
-                "Ошибка ввода",
-                "Поле title не может быть пустым"
-            )
-            return -1
-        if partner_type == '':
-            QMessageBox.critical(
-                self, 
-                "Ошибка ввода",
-                "Поле partner_type не может быть пустым"
-            )
-            return -1
-        if headmaster == '':
-            QMessageBox.critical(
-                self, 
-                "Ошибка ввода",
-                "Поле headmaster не может быть пустым"
-            )
-            return -1
-        if mail == '':
-            QMessageBox.critical(
-                self, 
-                "Ошибка ввода",
-                "Поле mail не может быть пустым"
-            )
-            return -1
-        if phone == '':
-            QMessageBox.critical(
-                self, 
-                "Ошибка ввода",
-                "Поле phone не может быть пустым"
-            )
-            return -1
-        if address == '':
-            QMessageBox.critical(
-                self, 
-                "Ошибка ввода",
-                "Поле address не может быть пустым"
-            )
-            return -1
-        if INN == '':
-            QMessageBox.critical(
-                self, 
-                "Ошибка ввода",
-                "Поле INN не может быть пустым"
-            )
-            return -1
-            QMessageBox.critical(
-                self, 
-                "Ошибка ввода",
-                "Поле address не может быть пустым"
-            )
-            return -1
-        if rating == '':
-            QMessageBox.critical(
-                self, 
-                "Ошибка ввода",
-                "Поле rating не может быть пустым"
-            )
-            return -1
-
-        global p_id
-
-        q = f"""UPDATE `partners` SET title = '{title}', type = '{partner_type}', 
-headmaster = '{headmaster}', mail = '{mail}', phone = '{phone}', 
-address = '{address}', INN = '{INN}', rating = {rating} 
-WHERE id = {p_id}
-        """
-        res = cursor.execute(q)
-        conn.commit()
+        return [title, PType, headmaster, mail, phone, inn, address, rating]
 
 
 class MainWindow(QWidget):
@@ -193,41 +106,62 @@ class MainWindow(QWidget):
         self.ui = Main_Form()
         self.ui.setupUi(self)
 
-        self.ui.btn_add.clicked.connect(self.open_partners_form)
-        self.ui.tableWidget.clicked.connect(self.open_partners_form_edit)
+        self.ui.btn_add.clicked.connect(self.open_partner_form_create)
+        self.ui.tableWidget.clicked.connect(self.open_partner_form_edit)
+
+        self.refresh_data()
     
-    def open_partners_form(self):
-        self.ui.partners_form = PartnersWindow()
-        self.ui.partners_form.show()
+    def open_partner_form_create(self):
+        self.ui.partner_form = PartnerWindow()
+        self.ui.partner_form.show()
+        self.ui.partner_form.ui.btn_create.show()
+        self.ui.partner_form.ui.btn_edit.hide()
+        # ----------
+        self.ui.partner_form.closeEvent = self.refresh_data
 
-    def open_partners_form_edit(self):
+    def open_partner_form_edit(self):
+        self.ui.partner_form = PartnerWindow()
+        self.ui.partner_form.show()
+        self.ui.partner_form.ui.btn_create.hide()
+        self.ui.partner_form.ui.btn_edit.show()
+
+        global _id
         partner = self.ui.tableWidget.currentItem().text()
-        tmp = partner.split('\n')
-        headmaster = tmp[1].strip()
-        p_type, title = tmp[0].split(' | ')
-        title = title.rsplit(maxsplit=1)[0].strip()
-        print(title)
+        PType, title = partner.split('\n')[0].split(' | ')
+        title = title.split(' ')[0]
+        print([title, PType])
+        stmt = "SELECT * FROM partners WHERE `title`=%s AND `type`=%s"
+        cursor.execute(stmt, [title, PType])
+        partners = cursor.fetchone()
+        self.ui.partner_form.ui.edt_title.setText(partners[1])
+        self.ui.partner_form.ui.edt_type.setText(partners[2])
+        self.ui.partner_form.ui.edt_headmaster.setText(partners[3])
+        self.ui.partner_form.ui.edt_mail.setText(partners[4])
+        self.ui.partner_form.ui.edt_phone.setText(partners[5])
+        self.ui.partner_form.ui.edt_inn.setText(partners[6])
+        self.ui.partner_form.ui.edt_address.setText(partners[7])
+        self.ui.partner_form.ui.edt_rating.setText(str(partners[8]))
+        # ----------
+        self.ui.partner_form.closeEvent = self.refresh_data
 
-        self.ui.partners_form = PartnersWindow()
-        self.ui.partners_form.show()
+    def refresh_data(self, event=None):
+        self.ui.tableWidget.horizontalHeader().setStretchLastSection(True)
+        self.ui.tableWidget.verticalHeader().setDefaultSectionSize(100)
+        self.ui.tableWidget.setRowCount(0)
+        self.ui.tableWidget.setColumnCount(1)
 
-        cursor = conn.cursor()
-        q = f"SELECT * FROM `partners` where `type`='{p_type}' and `title`='{title}'"
-        cursor.execute(q)
-        partner = cursor.fetchone()
-        print(partner)
+        stmt = "SELECT * FROM partners ORDER BY rating DESC"
+        cursor.execute(stmt)
+        rows = cursor.fetchall()
+        for row in rows:
+            row_count = self.ui.tableWidget.rowCount()
 
-        global p_id
-
-        p_id = partner[0]
-        self.ui.partners_form.ui.edt_title.setText(partner[1])
-        self.ui.partners_form.ui.edt_type.setText(partner[2])
-        self.ui.partners_form.ui.edt_headmaster.setText(partner[3])
-        self.ui.partners_form.ui.edt_mail.setText(partner[4])
-        self.ui.partners_form.ui.edt_phone.setText(partner[5])
-        self.ui.partners_form.ui.edt_address.setText(partner[6])
-        self.ui.partners_form.ui.edt_inn.setText(partner[7])
-        self.ui.partners_form.ui.edt_rating.setText(str(partner[8]))
+            self.ui.tableWidget.setRowCount(row_count + 1)
+            text = f"""{row[2]} | {row[1]} \t\t\t\t{random.randrange(0, 16, 5)}%
+{row[3]}
+{row[5]}
+Рейтинг: {row[8]}"""
+            self.ui.tableWidget.setItem(row_count, 0, QTableWidgetItem(text))
 
 
 if __name__ == "__main__":
@@ -235,25 +169,5 @@ if __name__ == "__main__":
 
     window = MainWindow()
     window.show()
-
-    cursor = conn.cursor()
-    q = "SELECT * FROM partners"
-    cursor.execute(q)
-    rows = cursor.fetchall()
-    # print(rows)
-    
-    window.ui.tableWidget.horizontalHeader().setStretchLastSection(True)
-    window.ui.tableWidget.verticalHeader().setDefaultSectionSize(100)
-    window.ui.tableWidget.setRowCount(0)
-    window.ui.tableWidget.setColumnCount(1)
-    for row in rows:
-        row_count = window.ui.tableWidget.rowCount()
-        window.ui.tableWidget.setRowCount(row_count + 1)
-        text = f"""{row[2]} | {row[1]}\t\t\t\t\t {random.randrange(0, 16, 5)}%
-{row[3]}
-{row[4]}
-{row[5]}
-Рейтинг: {row[-1]}"""
-        window.ui.tableWidget.setItem(row_count, 0, QTableWidgetItem(text))
 
     sys.exit(app.exec())

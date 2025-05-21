@@ -22,22 +22,18 @@ class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(601, 401)
-        Form.setMinimumSize(QSize(601, 401))
-        icon = QIcon()
-        icon.addFile(u"\u041c\u0430\u0441\u0442\u0435\u0440 \u043f\u043e\u043b.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        Form.setWindowIcon(icon)
-        Form.setStyleSheet(u"background: white;\n"
-"")
-        self.tableWidget = QTableWidget(Form)
-        self.tableWidget.setObjectName(u"tableWidget")
-        self.tableWidget.setGeometry(QRect(10, 80, 581, 311))
-        self.tableWidget.setStyleSheet(u"color: black;")
+        Form.resize(493, 368)
+        Form.setMinimumSize(QSize(493, 368))
+        Form.setMaximumSize(QSize(493, 368))
+        Form.setStyleSheet(u"background:  white;\n"
+"color: black;")
         self.btn_add = QPushButton(Form)
         self.btn_add.setObjectName(u"btn_add")
-        self.btn_add.setGeometry(QRect(150, 30, 301, 25))
-        self.btn_add.setStyleSheet(u"background-color: #67BA90;\n"
-"color: black;")
+        self.btn_add.setGeometry(QRect(170, 20, 161, 34))
+        self.btn_add.setStyleSheet(u"background-color: #67BA80;")
+        self.tableWidget = QTableWidget(Form)
+        self.tableWidget.setObjectName(u"tableWidget")
+        self.tableWidget.setGeometry(QRect(10, 80, 471, 271))
 
         self.retranslateUi(Form)
 
@@ -46,6 +42,6 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
-        self.btn_add.setText(QCoreApplication.translate("Form", u"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u043f\u0430\u0440\u0442\u043d\u0435\u0440\u0430", None))
+        self.btn_add.setText(QCoreApplication.translate("Form", u"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c", None))
     # retranslateUi
 

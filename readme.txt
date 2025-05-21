@@ -1,15 +1,4 @@
-db url: http://localhost/phpmyadmin/index.php
-
-login: root
+database
+url: http://localhost/phpmyadmin/index.php?route=/
+log: root
 password: root
-
-Table partners:
-id
-title
-type
-headmaster
-mail
-phone
-address
-INN
-rating

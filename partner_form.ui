@@ -6,66 +6,39 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>401</width>
-    <height>341</height>
+    <width>492</width>
+    <height>362</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>492</width>
+    <height>362</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>492</width>
+    <height>362</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background: white;
+   <string notr="true">background:  white;
 color: black;</string>
   </property>
-  <widget class="QPushButton" name="btn_add">
-   <property name="geometry">
-    <rect>
-     <x>100</x>
-     <y>30</y>
-     <width>81</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: #67BA80;</string>
-   </property>
-   <property name="text">
-    <string>Создать</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn_edit">
-   <property name="geometry">
-    <rect>
-     <x>210</x>
-     <y>30</y>
-     <width>81</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: #67BA80;</string>
-   </property>
-   <property name="text">
-    <string>Сохранить</string>
-   </property>
-  </widget>
   <widget class="QWidget" name="formLayoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>80</y>
-     <width>381</width>
-     <height>251</height>
+     <y>60</y>
+     <width>471</width>
+     <height>315</height>
     </rect>
    </property>
    <layout class="QFormLayout" name="formLayout">
-    <item row="0" column="0">
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string>text</string>
-      </property>
-     </widget>
-    </item>
     <item row="0" column="1">
      <widget class="QLineEdit" name="edt_title"/>
     </item>
@@ -139,7 +112,40 @@ color: black;</string>
     <item row="7" column="1">
      <widget class="QLineEdit" name="edt_rating"/>
     </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>title</string>
+      </property>
+     </widget>
+    </item>
    </layout>
+  </widget>
+  <widget class="QPushButton" name="btn_create">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>10</y>
+     <width>201</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Создать</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_edit">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>10</y>
+     <width>201</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Сохранить</string>
+   </property>
   </widget>
  </widget>
  <resources/>

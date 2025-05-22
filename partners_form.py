@@ -22,14 +22,14 @@ class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(492, 362)
-        Form.setMinimumSize(QSize(492, 362))
-        Form.setMaximumSize(QSize(492, 362))
+        Form.resize(495, 420)
+        Form.setMinimumSize(QSize(495, 420))
+        Form.setMaximumSize(QSize(495, 420))
         Form.setStyleSheet(u"background:  white;\n"
 "color: black;")
         self.formLayoutWidget = QWidget(Form)
         self.formLayoutWidget.setObjectName(u"formLayoutWidget")
-        self.formLayoutWidget.setGeometry(QRect(10, 60, 471, 315))
+        self.formLayoutWidget.setGeometry(QRect(10, 60, 471, 301))
         self.formLayout = QFormLayout(self.formLayoutWidget)
         self.formLayout.setObjectName(u"formLayout")
         self.formLayout.setContentsMargins(0, 0, 0, 0)
@@ -115,10 +115,13 @@ class Ui_Form(object):
 
         self.btn_create = QPushButton(Form)
         self.btn_create.setObjectName(u"btn_create")
-        self.btn_create.setGeometry(QRect(30, 10, 201, 34))
+        self.btn_create.setGeometry(QRect(30, 370, 201, 34))
         self.btn_edit = QPushButton(Form)
         self.btn_edit.setObjectName(u"btn_edit")
-        self.btn_edit.setGeometry(QRect(260, 10, 201, 34))
+        self.btn_edit.setGeometry(QRect(260, 370, 201, 34))
+        self.btn_back = QPushButton(Form)
+        self.btn_back.setObjectName(u"btn_back")
+        self.btn_back.setGeometry(QRect(10, 10, 91, 34))
 
         self.retranslateUi(Form)
 
@@ -137,5 +140,6 @@ class Ui_Form(object):
         self.label.setText(QCoreApplication.translate("Form", u"title", None))
         self.btn_create.setText(QCoreApplication.translate("Form", u"\u0421\u043e\u0437\u0434\u0430\u0442\u044c", None))
         self.btn_edit.setText(QCoreApplication.translate("Form", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None))
+        self.btn_back.setText(QCoreApplication.translate("Form", u"\u041d\u0430\u0437\u0430\u0434", None))
     # retranslateUi
 

@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>Мастер пол.ico</normaloff>Мастер пол.ico</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">background:  white;
 color: black;</string>

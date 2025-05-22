@@ -28,7 +28,8 @@ class PartnerWindow(QWidget):
         self.ui.setupUi(self)
 
         self.ui.btn_create.clicked.connect(self.create)
-    
+        self.ui.btn_back.clicked.connect(self.close)
+
     def create(self):
         fields = self.get_fields()
         if not fields:
@@ -55,7 +56,8 @@ class PartnerWindow(QWidget):
         QMessageBox.information(self, "", "Партнер обновлен")
         self.close()
 
-
+    def go_back(self):
+        self.close()
 
     def get_fields(self):
         title = self.ui.edt_title.text()

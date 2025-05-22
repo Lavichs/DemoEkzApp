@@ -1,0 +1,12 @@
+- ERD
+- Database and Tables
+- Foreign keys
+- Import data (as CSV)
+- Export data as SQL
+- create GUI  (colors, QPushButton, QTableWidget, size, **ICON**)
+- create MainWindow | QWidget, setuUI
+- create window and app | if "__main__", QApplication(sys.argv), sys.exit(app.exec())
+- connect to DB | pymysql.connect(host, user, password, db), conn.cursor(), cursor.execute(stmt).fetchall()
+- show data in table | 
+  - self.ui.table.widget.horizontalHeader().setStretchLastSection()
+  - .verticalHeader()
